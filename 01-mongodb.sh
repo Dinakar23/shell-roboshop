@@ -23,7 +23,7 @@ VALIDATE(){
         echo -e "$TIMESTAMP [ERROR] $2 ... $R FAILURE $N" | tee -a $LOGS_FILE
         exit 1
     else
-        echo -e "$TIMESTAMP [INFO] $G SUCCESS $N"  | tee -a $LOGS_FILE
+        echo -e "$TIMESTAMP [INFO] $2 $G SUCCESS $N"  | tee -a $LOGS_FILE
     fi
 }
 
