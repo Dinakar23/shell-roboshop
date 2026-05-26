@@ -21,7 +21,7 @@ VALIDATE(){
     if [ $1 -ne 0 ];then
         echo -e " $IMESTAMP [ERROR] $2 ... $R FAILURE $N " | tee -a $LOGS_FILE
     else
-        echo -e "$IMESTAMP [INFO] $G SUCCESS $N " &>> | tee -a $LOGS_FILE
+        echo -e "$IMESTAMP [INFO] $G SUCCESS $N "  | tee -a $LOGS_FILE
 
 }
 
