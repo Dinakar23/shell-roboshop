@@ -22,6 +22,7 @@ VALIDATE(){
         echo -e " $IMESTAMP [ERROR] $2 ... $R FAILURE $N " | tee -a $LOGS_FILE
     else
         echo -e "$IMESTAMP [INFO] $G SUCCESS $N "  | tee -a $LOGS_FILE
+    fi
 }
 
 cp mongo.repo /etc/yum.repos.d/mongo.repo
