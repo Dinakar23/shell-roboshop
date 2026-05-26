@@ -35,3 +35,9 @@ VALIDATE $? "Installing MongoDB"
 
 systemctl enable --now mongod
 VALIDATE $? "Starting and enabling Mongodb"
+
+sed -i 's/127.0.0.1/0.0.0.0' /etc/mongod.conf
+VALIDATE $? "Allowing romote connections to MongoDB "
+
+systemctl restart mongod
+VALIDATE $? "Restarting MongoDB"
