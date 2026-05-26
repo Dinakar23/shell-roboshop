@@ -13,13 +13,13 @@ Y="\e[33m"
 N="\e[0m"
 
 if [ "$USERID" -ne 0 ]; then
-    echo " $IMESTAMP [ERROR] Please run the script with root access " | tee -a $LOGS_FILE
+    echo -e "$IMESTAMP [ERROR] $R Please run the script with root access $N " | tee -a $LOGS_FILE
     exit 1
 fi
 
 VALIDATE(){
     if [ $1 -ne 0 ];then
-        echo -e " $IMESTAMP [ERROR] $2 ... $R FAILURE $N " | tee -a $LOGS_FILE
+        echo -e "$IMESTAMP [ERROR] $2 ... $R FAILURE $N " | tee -a $LOGS_FILE
     else
         echo -e "$IMESTAMP [INFO] $G SUCCESS $N "  | tee -a $LOGS_FILE
     fi
