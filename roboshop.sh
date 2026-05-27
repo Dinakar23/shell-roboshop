@@ -34,24 +34,23 @@ do
     --hosted-zone-id $ZONE_ID\
     --change-batch "
         {
-                "Comment": "Updating the IP address for production subdomain",
-                "Changes": [
-                {
-                "Action": "UPSERT",
-                "ResourceRecordSet": 
-                    {
-                        "Name": "$R53_RECORD",
-                        "Type": "A",
-                        "TTL": 1,
-                        "ResourceRecords": [
-                            {
-                                "Value": "$IP"
-                            }
-                        ]
-                    }   
-                }
-            ]
-        }
+  "Comment": "Updating the IP address",
+  "Changes": [
+    {
+      "Action": "UPSERT",
+      "ResourceRecordSet": {
+        "Name": "$R53_RECORD",
+        "Type": "A",
+        "TTL": 1,
+        "ResourceRecords": [
+          {
+            "Value": "$IP"
+          }
+        ]
+      }
+    }
+  ]
+}
 
     "
 done
