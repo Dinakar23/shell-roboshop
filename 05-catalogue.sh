@@ -68,6 +68,7 @@ dnf install mongodb-mongosh -y &>> $LOGS_FILE
 VALIDATE $? "Installed mongodb client"
 
 INDEX=$(mongosh --host mongodb.daws90s.online --eval 'db.getMongo().getDBnames().index("catalogue")' )
+
 if [ $INDEX -lt 0 ]; then
     mongosh --host mongodb.dinakardevops.online </app/db/master-data.js
     VALIDATE $? "Load products"
