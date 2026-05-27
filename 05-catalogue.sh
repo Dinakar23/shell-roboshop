@@ -5,6 +5,7 @@ sudo mkdir -p $LOGS_FOLDER
 sudo chown -R ec2-user:ec2-user $LOGS_FOLDER
 sudo chmod -R 755 $LOGS_FOLDER
 LOGS_FILE="$LOGS_FOLDER/$0.log "
+SCRIPT_DIR=$PWD
 
 USERID=$(id -u)
 R="\e[31m"
@@ -40,6 +41,28 @@ else
     echo "Creating roboshop user already created ... SKIPPING"
 fi
 
+rm -rf /app
+VALIDATE $? "Removing the existing code"
+
+rm -rf /tmp/catalogue.zip
+VALIDATE $? "Removing catalogue zip"
 
 mkdir  -p  /app   &>> $LOGS_FILE # where we need to store the application code ..
 VALIDATE $? "Creating the directory called App" 
+
+curl -o /tmp/catalogue.zip https://roboshop-artifacts.s3.amazonaws.com/catalogue-v3.zip 
+cd /app 
+unzip /tmp/catalogue.zip &>> $LOGS_FILE
+VALIDATE $? "Downloaded and extracted catalogue code"
+
+npm install &>> $LOGS_FILE
+VALIDATE $?  "Installing Dependencies"
+
+cp $SCRIPT_DIR/catalogue.service /etc/systemd/system/catalogue.service
+VALIDATE $? "Created systemctl service"
+
+cp $SCRIPT_DIR/ mongo.rep /etc/yum.repos.d/mongo.repo
+VALIDATE $? "Added mongo repo"
+
+dnf install mongodb-mongosh -y
+VALIDATE $? "Installed mongodb client"
