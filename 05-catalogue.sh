@@ -27,16 +27,13 @@ VALIDATE(){
     fi
 }
 
-cp rabbitmq.repo /etc/yum.repos.d/rabbitmq.repo
-VALIDATE $? "Adding rabbitmq repo"
+dnf module disable nodejs -y
+dnf module enable nodejs:20 -y
+dnf install nodejs -y
+VALIDATE $? "Disable the old version and enable and install the latest version"
 
-dnf install rabbitmq-server -y &>> $LOGS_FILE
-VALIDATE $? "Installing RabbitMq server"
+useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop
+VALIDATE $? "Creating user"
 
-systemctl enable rabbitmq-server &>> $LOGS_FILE
-systemctl start rabbitmq-server &>> $LOGS_FILE
-VALIDATE $? "Enabling and starting RabbbitMq server"
-
-rabbitmqctl add_user roboshop roboshop123 &>> $LOGS_FILE
-rabbitmqctl set_permissions -p / roboshop ".*" ".*" ".*"
-VALIDATE $? "Setting up username and password"
+mkdir /app # where we need to store the application code
+VALIDATE $? "Creating the directory called App" 
