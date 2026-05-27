@@ -64,5 +64,17 @@ VALIDATE $? "Created systemctl service"
 cp $SCRIPT_DIR/mongo.repo /etc/yum.repos.d/mongo.repo
 VALIDATE $? "Added mongo repo"
 
-dnf install mongodb-mongosh -y
+dnf install mongodb-mongosh -y &>> $LOGS_FILE
 VALIDATE $? "Installed mongodb client"
+
+INDEX=$(mongos --host mongodb.daws90s.online --eval 'db.getMongo().getDBnames().index("catalogue")' )
+if [ $INDEX -lt o ]; then
+    mongosh --host mongodb.dinakardevops.online </app/db/master-data.js
+    VALIDATE $? "Load products"
+else 
+    echo "Products already loaded ... SKIPPING"
+fi
+
+systemctl enable catalogue &>> $LOGS_FILE
+systemctl restart catalogue &>> $LOGS_FILE
+VALIDATE $? "Restarting Catalogue"
