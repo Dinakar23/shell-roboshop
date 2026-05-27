@@ -35,5 +35,5 @@ VALIDATE $? "Disable the old version and enable and install the latest version"
 useradd --system --home /app --shell /sbin/nologin --comment "roboshop system user" roboshop
 VALIDATE $? "Creating user"
 
-mkdir /app # where we need to store the application code
+mkdir /app # where we need to store the application code ..
 VALIDATE $? "Creating the directory called App" 
