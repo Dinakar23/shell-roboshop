@@ -10,3 +10,12 @@ if [ $# -ne 2 ]; then
     echo "USAGE : $0 [create/delete] [instace1] [instace2]"
     exit 1
 fi
+
+ACTION=$1
+shift # First argument will be removed .
+
+if  [ $ACTION != "create" ] && [ $ACTION != "delete" ]; then
+    echo "ERROR:: First argument must be either create or delete"
+    echo "USAGE : $0 [create/delete] [instace1] [instace2]"
+    ecit 1
+fi 
