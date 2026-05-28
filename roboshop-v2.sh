@@ -14,7 +14,7 @@ fi
 ACTION=$1
 shift # First argument will be removed .
 
-if  [ $ACTION != "create" ] && [ $ACTION != "delete" ]; then
+if  [ "$ACTION" != "create" ] && [ "$ACTION" != "delete" ]; then
     echo "ERROR:: First argument must be either create or delete"
     echo "USAGE : $0 [create/delete] [instace1] [instace2]"
     ecit 1
