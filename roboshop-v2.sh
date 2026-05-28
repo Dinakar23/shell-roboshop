@@ -40,7 +40,7 @@ do
             --output text)
             echo "Instance_id:$INSTANCE_ID"
         else
-            echo "robohsop $instance already running: $INSTANCE_ID"
+            echo "robohsop-$instance already running: $INSTANCE_ID"
         fi
     fi
 done 
