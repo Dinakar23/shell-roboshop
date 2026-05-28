@@ -7,6 +7,6 @@ DOMAIN_NAME="dinakardevops.online"
 # validation
 if [ $# -ne 2 ]; then
     echo -e "$R ERROR:: Atleast 2 arguments required $N"
-    ehco "USAGE : $0 [create/delete] [instace1] [instace2]"
+    echo "USAGE : $0 [create/delete] [instace1] [instace2]"
     exit 1
 fi
