@@ -87,5 +87,6 @@ do
             --instance-ids $INSTANCE_ID \
             --output text
             echo "Deleted roboshop-$instance"
+        fi
     fi
 done 
