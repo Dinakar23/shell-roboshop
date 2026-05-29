@@ -5,7 +5,7 @@ ZONE_ID="Z0522495674LVI9OE7CB"
 DOMAIN_NAME="dinakardevops.online"
 
 # validation
-if [ $# -ne 2 ]; then
+if [ $# != 2 ]; then
     echo -e "$R ERROR:: Atleast 2 arguments required $N"
     echo "USAGE : $0 [create/delete] [instace1] [instace2]"
     exit 1
