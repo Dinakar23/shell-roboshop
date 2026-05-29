@@ -79,5 +79,13 @@ do
             }
         '
         echo "Updated R53 record : $instance"
+    else
+        if [ "$INSTANCE_ID" == "None" ]; then
+            echo "roboshop-$instance instance does not exist ... SKIPPING"
+        else
+            aws ec2 terminate-instances \
+            --instance-ids $INSTANCE_ID \
+            --output text
+            echo "Deleted roboshop-$instance"
     fi
 done 
