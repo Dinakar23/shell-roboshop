@@ -39,20 +39,24 @@ do
             --query 'Instances[0].InstanceId' \
             --output text)
             echo "Instance_id:$INSTANCE_ID"
-            if [ "$instance" == "frontend" ]; then
-                IP=$(aws ec2 describe-instances --instance-ids $INSTANCE_ID \
-                    --query "Reservations[*].Instances[*].[PublicIpAddress]" \
-                    --output text
-                ) 
-                R53_RECORD="$DOMAIN_NAME"
-            else
-                IP=$(aws ec2 describe-instances --instance-ids $INSTANCE_ID \
-                --query "Reservations[*].Instances[*].[PrivateIpAddress]" \
-                --output text
-                )
-                R53_RECORD="$instance.$DOMAIN_NAME"
-            fi
-            #updating route53 rocord
+        else
+            echo "robohsop-$instance already running: $INSTANCE_ID"
+        fi
+
+        if [ "$instance" == "frontend" ]; then
+            IP=$(aws ec2 describe-instances --instance-ids $INSTANCE_ID \
+            --query "Reservations[*].Instances[*].[PublicIpAddress]" \
+            --output text
+            ) 
+            R53_RECORD="$DOMAIN_NAME"
+        else
+            IP=$(aws ec2 describe-instances --instance-ids $INSTANCE_ID \
+            --query "Reservations[*].Instances[*].[PrivateIpAddress]" \
+            --output text
+            )
+            R53_RECORD="$instance.$DOMAIN_NAME"
+        fi
+        #updating route53 rocord
                 aws route53 change-resource-record-sets \
                 --hosted-zone-id $ZONE_ID \
                 --change-batch '
@@ -76,9 +80,5 @@ do
                     }
                 '
                 echo "Updateed R53 record for : $instance"
-        else
-            echo "robohsop-$instance already running: $INSTANCE_ID"
-            
-        fi
     fi
 done 
