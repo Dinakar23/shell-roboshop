@@ -45,7 +45,7 @@ rm -rf /app
 VALIDATE $? "Removing the existing code"
 
 rm -rf /tmp/cart.zip
-VALIDATE $? "Removing user zip"
+VALIDATE $? "Removing cart zip"
 
 mkdir  -p  /app   &>> $LOGS_FILE # where we need to store the application code ..
 VALIDATE $? "Creating the directory called App" 
@@ -53,7 +53,7 @@ VALIDATE $? "Creating the directory called App"
 curl -o /tmp/cart.zip https://roboshop-artifacts.s3.amazonaws.com/cart-v3.zip 
 cd /app 
 unzip /tmp/cart.zip &>> $LOGS_FILE
-VALIDATE $? "Downloaded and extracted user code"
+VALIDATE $? "Downloaded and extracted cart code"
 
 npm install &>> $LOGS_FILE
 VALIDATE $?  "Installing Dependencies"
