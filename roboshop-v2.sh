@@ -57,28 +57,28 @@ do
             R53_RECORD="$instance.$DOMAIN_NAME"
         fi
         #updating route53 rocord
-                aws route53 change-resource-record-sets \
-                --hosted-zone-id $ZONE_ID \
-                --change-batch '
-                    {
-                        "Comment": "Updating the IP address",
-                        "Changes": [
-                            {
-                                "Action": "UPSERT",
-                                "ResourceRecordSet": {
-                                    "Name": "'$R53_RECORD'",
-                                    "Type": "A",
-                                    "TTL": 1,
-                                    "ResourceRecords": [
-                                        {
-                                            "Value": "'$IP'"
-                                        }
-                                    ]
-                                }
+            aws route53 change-resource-record-sets \
+            --hosted-zone-id $ZONE_ID \
+            --change-batch '
+                {
+                    "Comment": "Updating the IP address",
+                    "Changes": [
+                        {
+                            "Action": "UPSERT",
+                            "ResourceRecordSet": {
+                                "Name": "'$R53_RECORD'",
+                                "Type": "A",
+                                "TTL": 1,
+                                "ResourceRecords": [
+                                    {
+                                        "Value": "'$IP'"
+                                    }
+                                ]
                             }
-                        ]
-                    }
-                '
+                        }
+                    ]
+                }
+            '
                 echo "Updateed R53 record for : $instance"
     fi
 done 
