@@ -45,7 +45,7 @@ VALIDATE $? "Download and extracted frontend code"
 rm -rf /etc/nginx/nginx/conf
 VALIDATE $? "Removed defalut conf"
 
-cp nginx.cong /etc/nginx/nginx/conf
+cp SCRIPT_DIR nginx.cong /etc/nginx/nginx/conf
 VALIDATE $? "Copied roboshop nginx conf"
 
 systemctl restart nginx 
